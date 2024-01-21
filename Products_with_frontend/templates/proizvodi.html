@@ -1,0 +1,43 @@
+<!-- proizvodi.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proizvodi</title>
+</head>
+<body class="container">
+    <h1>Proizvodi</h1>
+    <ul>
+        {% for proizvod in proizvodi %}
+            <li>
+                {{ proizvod[1] }} - {{ proizvod[2] }}
+                <a href="/uredi_proizvod/{{ proizvod[0] }}">Uredi</a>
+                <a href="/obrisi_proizvod/{{ proizvod[0] }}" onclick="return confirm('Jeste li sigurni da želite obrisati ovaj proizvod?');">Obriši</a>
+                <button onclick="prikaziFormu('{{ proizvod[0] }}')">Smanji cijenu</button>
+                <div id="forma{{ proizvod[0] }}" style="display: none;">
+                    <form method="POST" action="/smanji_cijenu">
+                        <label for="proizvod_id">ID proizvoda:</label>
+                        <input type="text" name="proizvod_id" value="{{ proizvod[0] }}" readonly>
+                        <br>
+                        <label for="popust">Postotak za smanjenje cijene:</label>
+                        <input type="number" name="popust" step="0.01" required>
+                        <br>
+                        <button type="submit">Smanji cijenu</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+		<a href="/generiraj_string_proizvoda">Izvješće o proizvodima (string s proizvodima i cijenama)</a>
+    </ul>
+    <a href="/dodaj_proizvod">Dodaj proizvod</a>
+	<a href="/ukupna_cijena">Prikaži ukupnu cijenu proizvoda</a>
+    <script>
+        function prikaziFormu(proizvodId) {
+            var formaDiv = document.getElementById('forma' + proizvodId);
+            formaDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

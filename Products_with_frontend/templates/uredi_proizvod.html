@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uredi proizvod</title>
+</head>
+<body class="container">
+    <h1>Uredi proizvod</h1>
+    <form method="POST" action="/uredi_proizvod/{{ proizvod[0] }}">
+        <label for="naziv">Naziv:</label>
+        <input type="text" name="naziv" value="{{ proizvod[1] }}" required>
+        <br>
+        <label for="cijena">Cijena:</label>
+        <input type="number" name="cijena" step="0.01" value="{{ proizvod[2] }}" required>
+        <br>
+        <button type="submit">Spremi promjene</button>
+    </form>
+    <a href="/proizvodi">Povratak na proizvode</a>
+</body>
+</html>
